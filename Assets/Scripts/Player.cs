@@ -12,21 +12,25 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Backspace))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Shooting();
         }
-       
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.position += new Vector3(10 * Time.deltaTime, 0f, 0f);
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.position -= new Vector3(10 * Time.deltaTime, 0f, 0f);
+        }
     }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        print(other.name);
-    }
+
 
     public void Shooting()
     {
         GameObject B = Instantiate(Bullet, GameObject.Find("Position").transform.position, Quaternion.identity);
-        B.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 100);
+        B.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 1000);
         Destroy(B, 2f);
     }
 }
